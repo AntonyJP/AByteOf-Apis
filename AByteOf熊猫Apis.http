@@ -1,0 +1,6 @@
+@AByteOf熊猫Apis_HostAddress = http://localhost:5034
+
+GET {{AByteOf熊猫Apis_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
