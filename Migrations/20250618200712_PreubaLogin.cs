@@ -5,7 +5,7 @@
 namespace AByteOf熊猫Apis.Migrations
 {
     /// <inheritdoc />
-    public partial class UsuariosregistradosConApis : Migration
+    public partial class PreubaLogin : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

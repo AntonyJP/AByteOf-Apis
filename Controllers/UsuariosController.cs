@@ -1,12 +1,15 @@
-﻿using System;
+﻿using AByteOf熊猫Apis.Data;
+using AByteOf熊猫Apis.Models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.Scripting;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using AByteOf熊猫Apis.Data;
-using AByteOf熊猫Apis.Models;
+
+
 
 namespace AByteOf熊猫Apis.Controllers
 {
@@ -20,6 +23,60 @@ namespace AByteOf熊猫Apis.Controllers
         {
             _context = context;
         }
+        // DTO para registro
+        public class UsuarioRegistroDto
+        {
+            public string Nombre { get; set; }
+            public string Correo { get; set; }
+            public string Contrasena { get; set; }
+        }
+
+        // DTO para inicio de sesión
+        public class UsuarioLoginDto
+        {
+            public string Correo { get; set; }
+            public string Contrasena { get; set; }
+        }
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody] UsuarioRegistroDto dto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            // Verificar si el correo ya existe
+            if (await _context.Usuarios.AnyAsync(u => u.Correo == dto.Correo))
+                return BadRequest("El correo ya está registrado.");
+
+            var usuario = new Usuarios
+            {
+                Nombre = dto.Nombre,
+                Correo = dto.Correo,
+                Contrasena = dto.Contrasena // Almacenar la contraseña como texto plano
+            };
+
+            _context.Usuarios.Add(usuario);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(Register), new { id = usuario.IdUsuario }, "Usuario registrado exitosamente.");
+        }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] UsuarioLoginDto dto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var usuario = await _context.Usuarios.FirstOrDefaultAsync(u => u.Correo == dto.Correo);
+            if (usuario == null)
+                return NotFound("No hay cuenta con ese correo.");
+
+            // Comparar la contraseña directamente
+            if (usuario.Contrasena != dto.Contrasena)
+                return Unauthorized("Contraseña incorrecta.");
+
+            return Ok("Inicio de sesión exitoso.");
+        }
+
 
         // GET: api/Usuarios
         [HttpGet]
@@ -104,5 +161,7 @@ namespace AByteOf熊猫Apis.Controllers
         {
             return _context.Usuarios.Any(e => e.IdUsuario == id);
         }
+
+        
     }
 }

@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AByteOf熊猫Apis.Migrations
 {
     [DbContext(typeof(UsuarioContext))]
-    [Migration("20250618190449_UsuariosregistradosConApis")]
-    partial class UsuariosregistradosConApis
+    [Migration("20250618200712_PreubaLogin")]
+    partial class PreubaLogin
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
