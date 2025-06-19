@@ -19,14 +19,14 @@ public class UsersController : ControllerBase
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] RegisterModel model)
     {
-        if (await _context.Usuarios.AnyAsync(u => u.Correo == model.Email))
+        if (await _context.Usuarios.AnyAsync(u => u.Correo == model.Correo))
             return BadRequest("El correo ya está registrado");
 
         var usuario = new Usuarios
         {
-            Nombre = model.Name,
-            Correo = model.Email,
-            Contrasena = model.Password // Almacenar en texto plano
+            Nombre = model.Nombre,
+            Correo = model.Correo,
+            Contrasena = model.Contrasena // Almacenar en texto plano
         };
 
         _context.Usuarios.Add(usuario);
@@ -38,9 +38,9 @@ public class UsersController : ControllerBase
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] LoginModel model)
     {
-        var usuario = await _context.Usuarios.FirstOrDefaultAsync(u => u.Correo == model.Email);
+        var usuario = await _context.Usuarios.FirstOrDefaultAsync(u => u.Correo == model.Correo);
 
-        if (usuario == null || usuario.Contrasena != model.Password)
+        if (usuario == null || usuario.Contrasena != model.Contrasena)
             return Unauthorized("Credenciales inválidas");
 
         return Ok("Inicio de sesión exitoso");
@@ -49,13 +49,13 @@ public class UsersController : ControllerBase
 
 public class RegisterModel
 {
-    public string Name { get; set; }
-    public string Email { get; set; }
-    public string Password { get; set; }
+    public string Nombre { get; set; }
+    public string Correo { get; set; }
+    public string Contrasena { get; set; }
 }
 
 public class LoginModel
 {
-    public string Email { get; set; }
-    public string Password { get; set; }
+    public string Correo { get; set; }
+    public string Contrasena { get; set; }
 }
