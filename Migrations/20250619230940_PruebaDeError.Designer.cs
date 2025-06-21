@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AByteOf熊猫Apis.Migrations
 {
     [DbContext(typeof(UsuarioContext))]
-    [Migration("20250618200712_PreubaLogin")]
-    partial class PreubaLogin
+    [Migration("20250619230940_PruebaDeError")]
+    partial class PruebaDeError
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,11 +26,11 @@ namespace AByteOf熊猫Apis.Migrations
 
             modelBuilder.Entity("AByteOf熊猫Apis.Models.Usuarios", b =>
                 {
-                    b.Property<int>("IdUsuario")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("IdUsuario"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Contrasena")
                         .IsRequired()
@@ -45,7 +45,7 @@ namespace AByteOf熊猫Apis.Migrations
                         .HasMaxLength(75)
                         .HasColumnType("nvarchar(75)");
 
-                    b.HasKey("IdUsuario");
+                    b.HasKey("Id");
 
                     b.ToTable("Usuarios");
                 });

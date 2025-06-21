@@ -43,7 +43,7 @@ public class UsersController : ControllerBase
         if (usuario == null || usuario.Contrasena != model.Contrasena)
             return Unauthorized("Credenciales inválidas");
 
-        return Ok("Inicio de sesión exitoso");
+        return Ok(new { message = "Inicio de sesión exitoso", idUsuario = usuario.Id     });
     }
 }
 

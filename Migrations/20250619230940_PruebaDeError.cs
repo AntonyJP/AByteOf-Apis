@@ -5,7 +5,7 @@
 namespace AByteOf熊猫Apis.Migrations
 {
     /// <inheritdoc />
-    public partial class PreubaLogin : Migration
+    public partial class PruebaDeError : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -14,7 +14,7 @@ namespace AByteOf熊猫Apis.Migrations
                 name: "Usuarios",
                 columns: table => new
                 {
-                    IdUsuario = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nombre = table.Column<string>(type: "nvarchar(75)", maxLength: 75, nullable: false),
                     Correo = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -22,7 +22,7 @@ namespace AByteOf熊猫Apis.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Usuarios", x => x.IdUsuario);
+                    table.PrimaryKey("PK_Usuarios", x => x.Id);
                 });
         }
 
