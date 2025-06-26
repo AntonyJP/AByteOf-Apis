@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AByteOf熊猫Apis.Migrations
 {
     [DbContext(typeof(UsuarioContext))]
-    [Migration("20250619230940_PruebaDeError")]
-    partial class PruebaDeError
+    [Migration("20250626202923_test3")]
+    partial class test3
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

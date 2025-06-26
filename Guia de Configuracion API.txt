@@ -1,0 +1,16 @@
+Para no presentar problemas al momento de la inicializacion de la API
+
+debe de realizar los siguientes pasos
+
+en el archivo AppSettingJson de la api configure el servidor a el de su maquina local
+y puede tanto como modificar el nombre de la base de datos para almacenarlo en otra en caso 
+ya tenga una base de datos usuarios
+
+elimine las migraciones ya existente y inicie la consola de el administrador de paquetes nugets
+donde colocara los siguientes comandos
+
+add-migration (nombre de su preferencia)
+update-database
+
+siguiendo estos pasos al inicializar la api y correr el programa no deberia de tener ningun tipo 
+de problemas gracias.

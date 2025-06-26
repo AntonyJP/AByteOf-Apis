@@ -5,7 +5,7 @@
 namespace AByteOf熊猫Apis.Migrations
 {
     /// <inheritdoc />
-    public partial class PruebaDeError : Migration
+    public partial class test3 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
